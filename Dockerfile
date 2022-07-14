@@ -29,6 +29,12 @@ RUN apt-get update \
 # Clean installation
 RUN apt-get remove -y curl jq
 
+# Copies your code file from your action repository to the filesystem path `/` of the container
+COPY entrypoint.sh /entrypoint.sh
+
 # Switch to non-root user
 RUN addgroup teskube && adduser -S -G testkube testkube
 USER testkube
+
+# Code file to execute when the docker container starts up (`entrypoint.sh`)
+ENTRYPOINT ["/entrypoint.sh"]

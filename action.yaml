@@ -1,0 +1,26 @@
+# action.yml
+name: 'Testkube'
+description: 'Execute Testkube command'
+inputs:
+  command:
+    description: 'Command'
+    required: true
+    default: 'get'
+  resource:
+    description: 'Resource'
+    required: false
+    default: 'tests'
+  parameters:
+    description: 'Parameters'
+    required: false
+    default: ''  
+outputs:
+  result:
+    description: 'The result of the command'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.command }}
+    - ${{ inputs.resource }}
+    - ${{ inputs.parameters }}
