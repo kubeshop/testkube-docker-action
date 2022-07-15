@@ -1,5 +1,4 @@
 #!/bin/sh -l
 
-command="kubectl testkube $1 $2 $3"
-result=$(eval "$command")
+result=`kubectl testkube $1 $2 $3`
 echo "::set-output name=result::$result"
