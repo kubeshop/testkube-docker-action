@@ -15,8 +15,9 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s
 # Download testkube and move to bin directory
 RUN VERSION=`curl -s -f https://api.github.com/repos/kubeshop/testkube/releases/latest | jq -r .tag_name | cut -c2-` \
  && curl -L "https://github.com/kubeshop/testkube/releases/download/v${VERSION}/testkube_${VERSION}_${PLATFORM}.tar.gz" | tar -xzvf - \
- && mv kubectl-testkube /usr/local/bin/testkube \
- && chmod +x /usr/local/bin/testkube
+ && chmod +x ./kubectl-testkube \
+ && mv ./kubectl-testkube /usr/local/bin
+
 
 # Configure testkube
 RUN mkdir .testkube && echo "{}" > .testkube/config.json
