@@ -18,7 +18,7 @@ inputs:
     description: 'API key'
     required: false
     default: ''
-  api-key:
+  api-uri:
     description: 'API uri'
     required: false
     default: ''
