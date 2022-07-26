@@ -10,10 +10,26 @@ inputs:
     description: 'Resource'
     required: false
     default: 'tests'
+  namespace:
+    description: 'Namespace'
+    required: false
+    default: 'testkube'
+  api-key:
+    description: 'API key'
+    required: false
+    default: ''
+  api-key:
+    description: 'API uri'
+    required: false
+    default: ''
   parameters:
     description: 'Parameters'
     required: false
-    default: ''  
+    default: ''
+  stdin:
+    description: 'Standard input'
+    required: false
+    default: ''
 outputs:
   result:
     description: 'The result of the command'
@@ -23,4 +39,8 @@ runs:
   args:
     - ${{ inputs.command }}
     - ${{ inputs.resource }}
+    - ${{ inputs.namespace }}
+    - ${{ inputs.api-key }}
+    - ${{ inputs.api-uri }}
     - ${{ inputs.parameters }}
+    - ${{ inputs.stdin }}

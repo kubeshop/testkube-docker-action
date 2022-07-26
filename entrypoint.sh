@@ -1,6 +1,35 @@
 #!/bin/sh -l
 
-result=`kubectl testkube $1 $2 $3`
+command="$1"
+resource="$2"
+namespace="$3"
+apikey="$4"
+apiuri="$5"
+parameters="$6"
+stdin="$7"
+
+cmdline="kubectl testkube ${command} ${resource}"
+if [[ ! -z "$namespace" ]]; then
+  cmdline="${cmdline} --namespace ${namespace}"
+fi
+
+if [[ ! -z "$apikey" ]]; then
+  echo "{\"oauth2Data\":{\"enabled\":true,\"token\":{\"access_token\":\"$apikey\",\"token_type\":\"bearer\",\"expiry\":\"0001-01-01T00:00:00Z\"}" > .testkube/config.json
+fi
+
+if [[ ! -z "$apiuri" ]]; then
+  cmdline="${cmdline} --api-uri ${apiuri} --client direct"
+fi
+
+if [[ ! -z "$parameters" ]]; then
+  cmdline="${cmdline} ${parameters}"
+fi
+
+if [[ ! -z "$stdin" ]]; then
+  result=`echo "$stdin" | $cmdline`
+else 
+  result=`$cmdline`
+fi
 
 status=$?
 if [[ $status -eq 1 ]]; then
