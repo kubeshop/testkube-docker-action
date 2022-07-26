@@ -14,6 +14,7 @@ if [[ ! -z "$namespace" ]]; then
 fi
 
 if [[ ! -z "$apikey" ]]; then
+  mkdir .testkube
   echo "{\"oauth2Data\":{\"enabled\":true,\"token\":{\"access_token\":\"$apikey\",\"token_type\":\"bearer\",\"expiry\":\"0001-01-01T00:00:00Z\"}" > .testkube/config.json
 fi
 
