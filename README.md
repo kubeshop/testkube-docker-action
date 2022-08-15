@@ -1,4 +1,4 @@
-# Testkube Docker Github action
+# Testkube Github action
 
 This action executes Testkube command for resource with parameters and returns execution result.
 
@@ -40,10 +40,13 @@ The result of command execution.
 
 ## Example usage
 
+```
 uses: actions/testkube-docker-action@v1
 with:
   command: 'get'
   resource: 'tests'
   namespace: 'testkube'
   parameters: '--crd-only'
-  
+```
+
+All description of cli commands and thier arguments can be found at [https://kubeshop.github.io/testkube/cli/kubectl-testkube/](https://kubeshop.github.io/testkube/cli/kubectl-testkube/) 
