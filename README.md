@@ -48,3 +48,5 @@ with:
   namespace: 'testkube'
   parameters: '--crd-only'
 ```
+
+All description of cli commands and thier arguments can be found at [https://kubeshop.github.io/testkube/cli/kubectl-testkube/](https://kubeshop.github.io/testkube/cli/kubectl-testkube/) 
