@@ -5,18 +5,20 @@ USER root
 ENV PLATFORM="Linux_x86_64"
 
 # Install curl to download testkube
-RUN apk update && apk --no-cache add curl jq
+RUN apk update && apk --no-cache add curl jq && \
+    # Install aws-cli
+    apk add --no-cache aws-cli
 
 # Install kubectl
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl \
- && chmod +x ./kubectl \
- && mv ./kubectl /usr/local/bin
+    && chmod +x ./kubectl \
+    && mv ./kubectl /usr/local/bin
 
 # Download testkube and move to bin directory
 RUN VERSION=`curl -s -f https://api.github.com/repos/kubeshop/testkube/releases/latest | jq -r .tag_name | cut -c2-` \
- && curl -L "https://github.com/kubeshop/testkube/releases/download/v${VERSION}/testkube_${VERSION}_${PLATFORM}.tar.gz" | tar -xzvf - \
- && chmod +x ./kubectl-testkube \
- && mv ./kubectl-testkube /usr/local/bin
+    && curl -L "https://github.com/kubeshop/testkube/releases/download/v${VERSION}/testkube_${VERSION}_${PLATFORM}.tar.gz" | tar -xzvf - \
+    && chmod +x ./kubectl-testkube \
+    && mv ./kubectl-testkube /usr/local/bin
 
 
 # Configure testkube
