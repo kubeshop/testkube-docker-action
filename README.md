@@ -49,4 +49,4 @@ with:
   parameters: '--crd-only'
 ```
 
-All description of cli commands and thier arguments can be found at [https://kubeshop.github.io/testkube/cli/kubectl-testkube/](https://kubeshop.github.io/testkube/cli/kubectl-testkube/) 
+All description of cli commands and thier arguments can be found at [https://kubeshop.github.io/testkube/reference/cli/testkube](https://kubeshop.github.io/testkube/reference/cli/testkube) 
