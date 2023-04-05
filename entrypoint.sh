@@ -28,8 +28,9 @@ fi
 
 if [[ ! -z "$stdin" ]]; then
   result="$(eval "echo "$stdin" | $cmdline")"
-else 
-  result="$(eval "$cmdline")"
+else
+  $($cmdline)
+  #result="$(eval "$cmdline")"
 fi
 
 status=$?
