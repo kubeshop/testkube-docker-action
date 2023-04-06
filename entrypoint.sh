@@ -33,11 +33,9 @@ echo "###############"
 kubectl testkube --help
 echo "###############"
 if [[ ! -z "$stdin" ]]; then
-  #$(echo "$stdin" | $cmdline)
-  result="$(eval "echo "$stdin" | $cmdline")"
+  result="$(eval "echo "$stdin" | $cmdline" | tee /dev/tty)"
 else
-  #$($cmdline)
-  result="$(eval "$cmdline")"
+  result="$(eval "$cmdline" | tee /dev/tty)"
 fi
 
 status=$?
