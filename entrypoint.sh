@@ -33,9 +33,9 @@ echo "###############"
 
 
 if [[ ! -z "$stdin" ]]; then
-  result=$(echo "$stdin" | $cmdline | tee /dev/tty)
+  result=$(echo "$stdin" | $cmdline | tee >(cat >&2))
 else
-  result=$($cmdline | tee /dev/tty)
+  result=$($cmdline | tee >(cat >&2))
 fi
 
 status=$?
