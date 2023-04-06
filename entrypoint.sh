@@ -8,7 +8,7 @@ apiuri="$5"
 parameters="$6"
 stdin="$7"
 
-cmdline="kubectl testkube ${command} ${resource}"
+cmdline="kubectl-testkube ${command} ${resource}"
 if [[ ! -z "$namespace" ]]; then
   cmdline="${cmdline} --namespace ${namespace}"
 fi
