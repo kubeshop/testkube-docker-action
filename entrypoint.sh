@@ -33,9 +33,9 @@ echo "###############"
 
 
 if [[ ! -z "$stdin" ]]; then
-  result="$(eval "echo "$stdin" | $cmdline | tee >(cat >&2)")"
+  result="$(eval "echo "$stdin" | $cmdline" | tee >(cat >&2))"
 else
-  result="$(eval "$cmdline | tee >(cat >&2)")"
+  result="$(eval "$cmdline" | tee >(cat >&2))"
 fi
 
 status=$?
