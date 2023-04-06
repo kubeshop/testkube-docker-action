@@ -35,7 +35,7 @@ output_file=$(mktemp)
 exit_code_file=$(mktemp)
 
 if [[ ! -z "$stdin" ]]; then
-  eval "echo $stdin | $cmdline | tee $output_file >/dev/tty; echo \$? > $exit_code_file"
+  eval "echo '$stdin' | $cmdline | tee $output_file >/dev/tty; echo \$? > $exit_code_file"
 else
   eval "$cmdline | tee $output_file >/dev/tty; echo \$? > $exit_code_file"
 fi
