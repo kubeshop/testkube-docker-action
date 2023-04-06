@@ -31,16 +31,14 @@ echo "###############"
 echo "stdin is $stdin"
 echo "###############"
 
-output_file=$(mktemp)
-exit_code_file=$(mktemp)
 
 if [[ ! -z "$stdin" ]]; then
-  eval "echo '$stdin' | $cmdline | tee $output_file >/dev/tty; echo \$? > $exit_code_file"
+  result=$(echo "$stdin" | $cmdline | tee /dev/tty)
 else
-  eval "$cmdline | tee $output_file >/dev/tty; echo \$? > $exit_code_file"
+  result=$($cmdline | tee /dev/tty)
 fi
-result=$(cat "$output_file")
-status=$(cat "$exit_code_file")
+
+status=$?
 if [[ $status -eq 1 ]]; then
   exit 1
 fi
