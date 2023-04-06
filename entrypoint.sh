@@ -26,6 +26,7 @@ if [[ ! -z "$parameters" ]]; then
   cmdline="${cmdline} ${parameters}"
 fi
 
+echo "command to run is $cmdline"
 if [[ ! -z "$stdin" ]]; then
   $(echo $stdin | $cmdline)
   #result="$(eval "echo "$stdin" | $cmdline")"
