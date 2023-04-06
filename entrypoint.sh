@@ -8,7 +8,7 @@ apiuri="$5"
 parameters="$6"
 stdin="$7"
 
-cmdline="kubectl-testkube ${command} ${resource}"
+cmdline="kubectl testkube ${command} ${resource}"
 if [[ ! -z "$namespace" ]]; then
   cmdline="${cmdline} --namespace ${namespace}"
 fi
@@ -33,9 +33,9 @@ echo "###############"
 
 
 if [[ ! -z "$stdin" ]]; then
-  result=$(echo "$stdin" | $cmdline | tee >(cat >&2))
+  result="$(eval "echo "$stdin" | $cmdline | tee >(cat >&2)")"
 else
-  result=$($cmdline | tee >(cat >&2))
+  result="$(eval "$cmdline | tee >(cat >&2)")"
 fi
 
 status=$?
