@@ -27,8 +27,9 @@ if [[ ! -z "$parameters" ]]; then
 fi
 
 echo "command to run is $cmdline"
+echo "stdin is $stdin"
 if [[ ! -z "$stdin" ]]; then
-  $(echo $stdin | $cmdline)
+  $(echo "$stdin" | $cmdline)
   #result="$(eval "echo "$stdin" | $cmdline")"
 else
   $($cmdline)
