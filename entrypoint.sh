@@ -27,7 +27,11 @@ if [[ ! -z "$parameters" ]]; then
 fi
 
 echo "command to run is $cmdline"
+echo "###############"
 echo "stdin is $stdin"
+echo "###############"
+kubectl testkube --help
+echo "###############"
 if [[ ! -z "$stdin" ]]; then
   $(echo "$stdin" | $cmdline)
   #result="$(eval "echo "$stdin" | $cmdline")"
