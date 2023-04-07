@@ -31,14 +31,23 @@ echo "###############"
 echo "stdin is $stdin"
 echo "###############"
 
+# Create a named pipe to capture the output of cmdline
+pipe=$(mktemp -u)
+mkfifo "$pipe"
+
 
 if [[ ! -z "$stdin" ]]; then
-  result="$(eval "echo "$stdin" | $cmdline" | tee >(cat >&2))"
+  #result="$(eval "echo "$stdin" | $cmdline" | tee >(cat >&2))"
+  { echo "$stdin" | $cmdline > "$pipe"; echo $? > "$pipe".status; } &
 else
-  result="$(eval "$cmdline" | tee >(cat >&2))"
+  { $cmdline > "$pipe"; echo $? > "$pipe".status; } &
 fi
 
-status=$?
+cat < "$pipe"
+status=$(cat < "$pipe".status)
+result=$(cat < "$pipe")
+rm "$pipe" "$pipe".status
+
 if [[ $status -eq 1 ]]; then
   exit 1
 fi
