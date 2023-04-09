@@ -27,9 +27,9 @@ if [[ ! -z "$parameters" ]]; then
 fi
 
 if [[ ! -z "$stdin" ]]; then
-  result="$(eval "echo "$stdin" | $cmdline")"
-else 
-  result="$(eval "$cmdline")"
+  result=$(echo "$stdin" | $cmdline | tee >(cat >&2))
+else
+  result=$($cmdline | tee >(cat >&2))
 fi
 
 status=$?
@@ -41,4 +41,4 @@ result="${result//'%'/'%25'}"
 result="${result//$'\n'/'%0A'}"
 result="${result//$'\r'/'%0D'}"
 
-echo "::set-output name=result::$result"
+echo "result=$result" >> $GITHUB_OUTPUT
