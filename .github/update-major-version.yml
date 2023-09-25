@@ -1,0 +1,34 @@
+name: Update Major Version
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+
+env:
+  git-user: kubeshop-bot
+  git-email: kubeshop-bot@kubeshop.io
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: dawidd6/action-get-tag@v1
+        name: Get tag
+        id: tag
+
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "${{ env.git-user }}"
+          git config user.email "${{ env.git-email }}"
+
+      - name: Create and push major tag
+        run: |
+          TAG="${{ steps.tag.outputs.tag }}"
+          MAJOR="${TAG%%.*}"
+          git tag -f "${MAJOR}"
+          git push -f origin "${MAJOR}"
