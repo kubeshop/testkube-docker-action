@@ -1,6 +1,6 @@
 # DEPRECATED
 
-Please use new [Testkube GH action](https://github.com/marketplace/actions/install-testkube) to build your pipeline more efficiently.
+Please use new [Testkube GH action](https://github.com/marketplace/actions/testkube-action) to build your pipeline more efficiently.
 
 # Testkube Github action
 
